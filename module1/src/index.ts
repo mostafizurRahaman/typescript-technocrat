@@ -5,3 +5,6 @@ const age: number = 10;
 const age1: number = 6;
 const c = age + age1;
 console.log(c, b, course, age1, age);
+
+
+const school : string = "Bamni Adarsha High School"; 
