@@ -296,3 +296,85 @@ myTuple[2] = 20; // Error: Type number is not assignable to type boolean
 //  can't include new index :
 myTuple[3] = "Ratul hossain"; // Errors : Type '"Ratul hossain"' is not assignable to type 'undefined'.
 ```
+
+## Literal Type In TypeScript :
+
+-  The literal types in TypeScript allow you to create types that express
+   specific values. There are three sets of literal types available in
+   TypeScript: strings, numbers, and booleans.
+-  Literal Type contain fixed value.
+-  Example:
+   ```ts
+   type Easing = "ease-in" | "ease-out" | "ease-in-out";
+   type OneToFive = 1 | 2 | 3 | 4 | 5;
+   ```
+
+## Object Types:
+
+-  Typescript has two main ways to define `object types`: using
+   `anonymous object types` or using `named interfaces or types`.
+
+-  ### Anonymous Object Type :
+
+   -  `Anonymous object types` are defined `inline` when declaring a `variable`
+      or `function` parameter.
+
+   -  syntax :
+      ```ts
+      const variableName: { propertyName: type; propertyName: type  , ...} = {
+         propertyName: "value",
+         propertyName: "value",
+      }
+      ```
+   -  Example :
+
+   ```ts
+   const car: { type: string; model: string; year: number } = {
+      type: "Toyota",
+      model: "Corolla",
+      year: 2009,
+   };
+   ```
+
+## Optional Type `(?)`:
+
+-  to make a property in `TypeScript` optional, you can place a question mark
+   after the property name.
+-  Then optional property type will be specific types | undefined
+-  Example:
+
+```ts
+interface userProps {
+   name: string;
+   company?: string; // the type will be string | undefined
+}
+
+let user: userProps = {
+   name: "Mostafizur Rahaman",
+   company: "Universe It Institute",
+};
+
+user = {
+   name: "Ratul hossain",
+};
+```
+
+## Readonly Modifier In TypeScript:
+
+-  `Readonly` modifier makes properties `immutable`.
+-  After using readonly on a property we can only assign data on an object.
+-  we can't update the value after assigning.
+-  Syntax:
+
+```ts
+const user: { readonly name: string; readonly age: number } = {
+   name: 'Mostafizur Rahaman"
+   age: 20
+};
+
+//  Errors;
+
+user.name 'ratul hossain' // Errors: Cannot assign to 'name' because it is a read-only
+user.age = 22 // Errors : Cannot assign to 'age' because it is a read-only
+
+```
