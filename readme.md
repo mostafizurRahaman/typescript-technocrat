@@ -496,6 +496,9 @@ sendGreetingToFriends(
 
 ## Object `Destructuring` In JavaScript :-
 
+-  When we try to destructure any variable we can not define type in destructure
+   object or array ;
+
 ```js
 const myInfo = {
    name: {
@@ -548,5 +551,297 @@ const [, , bestFriends, ...others] = friends;
 console.log(bestFriends, others);
 ```
 
+## `Type alias` -> "টাইপের উপনাম" in TypeScript
 
-## 
+-  In TypeScript, type aliases can be used to give a type `new name`.
+-  They are similar to `interfaces`,
+-  But they are more flexible as They can not only `alias` only object type but
+   also primitive types aliases and `others types` aliases
+-  Syntax :
+
+```ts
+//  if primitive data
+type TPrimitive = type;
+//  object type :
+type TObject = {
+   propertyName: type;
+   propertyName: type;
+};
+//  array type :
+type typeName = string[];
+type TRoll = number[];
+type TBoolean = boolean[];
+
+// tuple type: example
+type typeName = [string, boolean, string, number];
+
+
+//  function type in Type alias :
+type TFunctionName = (parameter: type, parameter: type): number
+```
+
+-  ### String in Type Alias:
+
+   -  we can define `type alias` for string :
+   -  Syntax:
+
+   ```ts
+   type TUserName = string;
+   ```
+
+-  ### Number in Type Alias:
+
+   -  we can define `type alias` for number :
+   -  Syntax:
+
+   ```ts
+   type TUserRoll = number;
+   ```
+
+   -  Example:
+
+   ```ts
+   type TUserRoll = number;
+   let roll: TUserRoll = 10;
+   ```
+
+-  ### Boolean in Type Alias:
+
+   -  we can define `type alias` for boolean :
+   -  Syntax:
+
+   ```ts
+   type TIsAdmin = boolean;
+   ```
+
+   -  Example:
+
+   ```ts
+   //  type alias for boolean :
+   type TIsAdmin = boolean;
+
+   const isAdmin: TIsAdmin = false;
+   ```
+
+-  ### Object in Type Alias:
+
+   -  we can define `type alias` for Object :
+   -  syntax :
+
+   ```ts
+   //  object type :
+   type TObject = {
+      propertyName: type;
+      propertyName: type;
+   };
+   ```
+
+   -  Example :
+
+   ```ts
+   //  Type Alias
+   type TStudent = {
+      name: string;
+      age: number;
+      contactNo?: string;
+      gender: "male" | "female";
+      address: string;
+   };
+   // use type here
+   const student1: TStudent = {
+      name: "Mostafiuzr rahaman",
+      age: 20,
+      contactNo: "01951976238",
+      gender: "male",
+      address: "lakshmipur",
+   };
+
+   // reuse same type here
+   const studnet2: TStudent = {
+      name: "Ratul hossain",
+      age: 20,
+      gender: "male",
+      address: "cumilla ",
+   };
+   ```
+
+-  ### Array in Type Alias:
+
+   -  we can define array in type alias:
+   -  syntax:
+
+   ```js
+   type TTypeName = type[];
+   ```
+
+   -Example :
+
+   ```ts
+   //  Type alias for array :
+   type TFriends = string[];
+
+   const friends: TFriends = [
+      "ratul hossain",
+      "hridoy hossain",
+      "kamrul hasan",
+   ];
+   console.log(friends);
+   ```
+
+-  ### Tuple in Type Alias:
+
+   -  We can declare tuple in Type alias :
+   -  syntax :
+
+   ```ts
+      type TTypeName = [type, type, type, ...]
+   ```
+
+   -  example:
+
+   ```ts
+   //  Type for tuple :  length 2 name , age , isMarried
+   type TUserData = [string, number, boolean];
+
+   const user1: TUserData = ["mostafizur rahaman", 21, false];
+   const user2: TUserData = ["ratul hossain", 20, false];
+   console.log(user1, user2);
+   ```
+
+-  ### Arrow function Type In Type Alias
+
+   -  we can declare arrow function in type alias.
+   -  syntax:
+
+   ```ts
+   type TArrowFunc = (parameter: type, parameter: type, ...) => returnType;
+   ```
+
+   -  Example:
+
+   ```ts
+   // Type Addition :
+   type TAdd = (num1: number, num2: number) => number;
+
+   // addition function :
+   const add: TAdd = (num1, num2) => {
+      return num1 + num2;
+   };
+
+   add(20, 30);
+   ```
+
+## Union Type: Union type allows a value to be more than one type.
+
+-  We can define multiple type by using union type.
+-  Union type can used to define a variable that can be different types.
+-  Union type define by using `pipe ( | )`.
+-  syntax :
+
+```ts
+type TypeName = type | type | type;
+```
+
+-  Example :
+
+```ts
+// literal type with union type :
+type TUserName = "Mostafizur" | "Fahim" | "Roman";
+
+const userName: TUserName = "Mostafizur";
+
+//  for primitive type :
+
+type TAge = string | age | undefined;
+const age: TAge = "tweenty";
+const age1: TAge = 20;
+const age3: TAge = undefined;
+
+// type objectType & null:
+type User = {
+   name: string;
+   gender: "male" | "female";
+   bloodGroup: "B+" | "A+" | "A-" | "B-" | "O+" | "O-" | "AB-" | "AB+";
+};
+```
+
+-  Example 2:
+
+```js
+type TUser = {
+   name: string,
+   gender: "male" | "female",
+   bloodGroup: "B+" | "B-" | "A+" | "A-" | "AB+" | "AB-" | "O-" | "O+",
+};
+let user: TUser | null = null;
+user = {
+   name: "Mostafiuzr",
+   gender: "male",
+   bloodGroup: "B+",
+};
+
+let user1: TUser | null = null;
+user1 = {
+   name: "mukta",
+   gender: "female",
+   bloodGroup: "B+",
+};
+
+console.log(user, user1);
+```
+
+## Intersection Type :
+
+-  Intersection types are way to combine multiple types into a single type.
+-  Intersection types contain all features of every single types which combined.
+-  We can define Intersection type by using `&` operator .
+-  syntax :
+
+```ts
+type TypeOne = {
+   name: string;
+   age: number;
+};
+type TypeTwo = {
+   profession: string;
+};
+type typeThree = typeOne & TypeTwo;
+
+// here typeThree contains name, age , profession property
+```
+
+-  Example :
+
+```ts
+type TBird = {
+   eyes: number;
+   wings: number;
+   fly: TFly;
+};
+
+type TEat = () => void;
+type TFly = () => void;
+type TMen = {
+   legs: number;
+   eat: TEat;
+};
+
+// intersection type is here: The TOwl contains all features of TBird & TMen
+type TOwl = TBird & TMen;
+
+const owl: TOwl = {
+   eyes: 2,
+   wings: 2,
+   legs: 2,
+   fly: () => {
+      console.log("flying ......");
+   },
+   eat: () => {
+      console.log("eating ..............");
+   },
+};
+
+console.log(owl);
+owl.fly();
+owl.eat();
+```
