@@ -1,3 +1,4 @@
+"use strict";
 // //  Reference Type In Typescript :
 // const user: {
 //    readonly firstName: string;
@@ -13,6 +14,5 @@
 //    isVerified: false,
 //    company: "universe It Institute",
 // };
-
 // user.firstName = "Fahim hossain";
 // user.company = "programming hero";

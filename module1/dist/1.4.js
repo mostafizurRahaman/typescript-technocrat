@@ -36,19 +36,19 @@
 // friendsAge.push("rabby hossain"); // Errors : Type string  isn't assignable  to type number.
 // friendsAge = "rabby hossaain"; // Error : Type string isn't assignable to type number[]
 // friendsAge = [false, false]; // Errors : Type boolean isn't assignable to type number[];
-var myTuple;
-myTuple = ["ratul hossain", 20, false];
-myTuple[0] = "Mostafizur rahaman";
-myTuple[1] = 20;
-myTuple[2] = true;
-myTuple[2] = true;
-//  Error Happens :
-//  first index of the tuple only allow string :
-myTuple[0] = false; // Error : Type boolean is not assignable to type string;
-myTuple[0] = 20; // Error : Type number is not assignable to type string;
-myTuple[1] = "stirng"; // Error: Type string is not assignable to type number
-myTuple[1] = false; // Error: Type boolean is not assignable to type number
-myTuple[2] = "any string"; // Error: Type string is not assignable to type boolean
-myTuple[2] = 20; // Error: Type number is not assignable to type boolean
-//  can't include new index :
-myTuple[3] = "Ratul hossain"; // Errors : Type '"Ratul hossain"' is not assignable to type 'undefined'.
+// let myTuple: [string, number, boolean];
+// myTuple = ["ratul hossain", 20, false];
+// myTuple[0] = "Mostafizur rahaman";
+// myTuple[1] = 20;
+// myTuple[2] = true;
+// myTuple[2] = true;
+// //  Error Happens :
+// //  first index of the tuple only allow string :
+// myTuple[0] = false; // Error : Type boolean is not assignable to type string;
+// myTuple[0] = 20; // Error : Type number is not assignable to type string;
+// myTuple[1] = "stirng"; // Error: Type string is not assignable to type number
+// myTuple[1] = false; // Error: Type boolean is not assignable to type number
+// myTuple[2] = "any string"; // Error: Type string is not assignable to type boolean
+// myTuple[2] = 20; // Error: Type number is not assignable to type boolean
+// //  can't include new index :
+// myTuple[3] = "Ratul hossain"; // Errors : Type '"Ratul hossain"' is not assignable to type 'undefined'.

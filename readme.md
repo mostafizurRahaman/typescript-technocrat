@@ -378,3 +378,175 @@ user.name 'ratul hossain' // Errors: Cannot assign to 'name' because it is a rea
 user.age = 22 // Errors : Cannot assign to 'age' because it is a read-only
 
 ```
+
+## Function Type in TypeScript :
+
+### Explicit Function Type write:
+
+-  #### Normal Function :
+
+   -  syntax:
+
+   ```ts
+   function add(parameter1: type, parameter2: type): returnType {
+      // other calculation code here
+      return value;
+   }
+   ```
+
+   -  Example :
+
+   ```js
+   function add(a: number, b: number): number {
+      return a + b;
+   }
+
+   add(2, 2);
+
+   add(3, "3"); // Errors : type string is not assignable to type number ;
+   add(true, 3); // Errors : type boolean is not assignable to type number
+   ```
+
+-  #### Arrow Function :
+
+   -  syntax:
+
+   ```ts
+   const functionName (parameter1: type, parameter2: type): returnType => {
+      return parameter1 + parameter2
+   }
+
+
+   ```
+
+-  Example:
+
+   ```ts
+      const add1 = (num1: number, num2: number): number => {
+         return num1 + num2;
+      };
+
+
+      add1(2, 3); add1(29, 29);
+
+      // Errors Happens : add1("2", 3); // Errors : Type string is not assignable to
+      type number; add(29, "mostafiuzr rahaman"); // Errors : Type String is not
+      assignable to type number ;
+
+   ```
+
+# Spreed Operator In TypeScript :
+
+-  By using `JavaScript` `spreed operator ` we can spreed or copy any object or
+   array
+
+   ```ts
+   const friends: string[] = [
+      "Ismail hossain",
+      "Redowan Shawon",
+      "ratul hossain",
+   ];
+   const others: string[] = ["Ratul santo", "sifat hossain ", "nayeam hossain"];
+
+   // friends.push(others);
+   // Errors : Argument of type 'string[]' is not assignable to parameter of type 'string'
+
+   friends.push(...others);
+   console.log(friends);
+
+   const mentor1 = {
+      typescript: "Mezbaul abedin",
+      redux: "mir hossain",
+      dbs: "mizan hossain",
+   };
+
+   const mentor2 = {
+      next: "tanmay",
+      prizma: "firoz vai",
+      cloud: "nahid hassan bulbul vai",
+   };
+
+   const mentorList = {
+      ...mentor1,
+      ...mentor2,
+   };
+   console.log(mentorList);
+   ```
+
+### Rest operator in Typescript:
+
+-  By using rest operator we can receive array of parameter in rest parameter :
+
+```ts
+function sendGreetingToFriends(...friends: string[]): void {
+   friends.forEach((i) => {
+      console.log(
+         `Hey ${i}, Congratulation in our typescript technocrat course `
+      );
+   });
+}
+
+sendGreetingToFriends(
+   "ismail fahim",
+   "jahed hossain",
+   "hridoy hossain",
+   "ratul hossain"
+);
+```
+
+## Object `Destructuring` In JavaScript :-
+
+```js
+const myInfo = {
+   name: {
+      firstName: "Mostafizur",
+      middleName: "Rahaman",
+      lastName: "Fahim",
+   },
+   age: 30,
+   phoneNumber: "01951976238",
+   email: {
+      primaryEmail: "mostafizurrahaman0401@gmail.com",
+      secondaryEmail: "fahim74@gmail.com",
+   },
+   bloodGroup: "B+",
+};
+
+const {
+   name: { firstName, middleName, lastName },
+   age,
+   phoneNumber,
+   email: { primaryEmail, secondaryEmail },
+   bloodGroup,
+} = myInfo;
+
+console.log(
+   firstName,
+   middleName,
+   lastName,
+   age,
+   phoneNumber,
+   primaryEmail,
+   secondaryEmail,
+   bloodGroup
+);
+```
+
+## Array `Destructuring` in TypeScript:-
+
+```ts
+const friends = [
+   "Roman Hossain",
+   "Ratul Hossain",
+   "Rahim Hossain",
+   "Rakib hossain",
+   "Rajjack Hossain",
+   "rohomot ullah",
+];
+
+const [, , bestFriends, ...others] = friends;
+console.log(bestFriends, others);
+```
+
+
+## 
