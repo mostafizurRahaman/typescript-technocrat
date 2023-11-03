@@ -927,3 +927,356 @@ owl.eat();
 
    console.log(student?.address?.permanentAddress);
    ```
+
+## Nullable Type In TypeScript :
+
+-  `Nullable` type helps us to define a type for variable either `specific type`
+-  Union type helps us to define nullable type. or `null`.
+-  syntax:
+
+```ts
+type TNullAbleString = string | null;
+
+const userName: TNullAbleString = "Mostafizur Rahaman";
+const userName1: TNullAbleString = null;
+
+console.log(userName, userName1);
+
+const search = (value: string | null): string => {
+   return value ? "searching " : "There is nothing search";
+};
+
+console.log(search(null));
+console.log(search("Mostafizur"));
+```
+
+## `unknown` type in typeScript:
+
+-  unknown which is the type-safe counterpart of any
+-  Anything else assignable to unknown.
+
+```ts
+let random: unknown;
+random = "Hello World!";
+random = {};
+random = 7;
+random = null;
+random = Math.random();
+random = ["USA", "Colombia", "India", "Canada"];
+random = new Country();
+random = undefined;
+```
+
+-  unknown is not assignable to others types. It's is the main different between
+   unknown and any.
+
+```ts
+let random: unknown;
+let foo: unknown;
+let bar: any;
+foo = random; // Correct
+bar = random; // Correct
+
+let stringValue: string;
+let numberValue: number;
+let arrayValue: [];
+let countryValue: Country;
+stringValue = random; // Error: Type 'unknown' is not assignable to type 'string'
+numberValue = random; // Error: Type 'unknown' is not assignable to type 'number'
+arrayValue = random; // Error: Type 'unknown' is not assignable to type '[]'
+countryValue = random; // Error: Type 'unknown' is not assignable to type 'Country'
+```
+
+-  Example :
+
+```ts
+//  Unknown Type :
+
+const getConvertSpeedMeterPerSecond = (message: unknown): void => {
+   if (typeof message === "number") {
+      const speed = (message * 1000) / 3600;
+      console.log(`${speed} km^sec`);
+   } else if (typeof message === "string") {
+      let [result, unit] = message.split(" ");
+      let speed = (parseFloat(result) * 1000) / 3600;
+      console.log(`${speed} km^sec`);
+   } else {
+      console.log("Please Provide a correct value");
+   }
+};
+
+getConvertSpeedMeterPerSecond(1000);
+getConvertSpeedMeterPerSecond("100 m^sec");
+```
+
+### Never Type In TypeScript :
+
+-  TypeScript introduced a new type never, which indicates the values that will
+   never occur.
+
+-  The never type is used when you are sure that something is never going to
+   occur.
+-  For example, you write a function which will not return to its end point or
+   always throws an exception.
+
+-  Type `never` has no value. Otherwise type `void` have value `undefined` or
+   `null`.
+
+```js
+function throwError(errorMsg: string): never {
+   throw new Error(errorMsg);
+}
+
+throw new Error("Your are unauthenticated user");
+```
+
+### Type `Assertion` in TypeScript: with `as`
+
+-  Type assertion in TypeScript is a way to explicitly specify the type of a
+   value, even when TypeScript cannot infer it automatically.
+-  If developer have more information about type of a variable , he can
+   explicitly define a type with `as` type ;
+-  syntax :
+
+```ts
+// use value as type
+
+variableName as type;
+```
+
+-  Example :
+
+   ```ts
+   // Type Assertion : as
+
+   let random: any;
+
+   // assign string :
+   random = "next level Development";
+   // random. // its not show the suggestion or properties of string when use include . (dot)
+
+   // so we can use here type assertion to declare the type string
+
+   const upperCase: string = (random as string).toUpperCase();
+   console.log(upperCase);
+
+   // assign number :
+   random = 22;
+   //  convert floated number:
+   const precision = (random as number).toFixed();
+   console.log(precision);
+
+   // assign array :
+   random = ["mostafizur rahaman", "ratul hossain", 20, 40];
+   (random as []).forEach((i) => console.log(i));
+
+   type TUser = {
+      name: string;
+      age: number;
+   };
+
+   random = { name: "mostafizur", age: 27 };
+   const age = (random as TUser).age;
+   const name = (random as TUser).name;
+   console.log(name, age);
+   ```
+
+-  Example 2: With A function ;
+
+   ```ts
+   const getKgToGm = (value?: string | number): string | number | undefined => {
+      if (typeof value === "string") {
+         const convertedValue = parseFloat(value) * 1000;
+         return `converted value : ${convertedValue}`;
+      }
+
+      if (typeof value === "number") {
+         return value * 1000;
+      }
+   };
+
+   const result1: string = getKgToGm("10") as string;
+   const result2: number = getKgToGm(20) as number;
+   const result3: undefined = getKgToGm(undefined) as undefined;
+   console.table([result1, result2, result3]);
+   ```
+
+-  Example : For Error Handling :
+
+   ```ts
+   type TCustomError = {
+      name: string;
+      stack: string;
+      message: string;
+   };
+
+   try {
+      throw new Error("UnAuthenticated User");
+   } catch (error) {
+      const err = error as TCustomError;
+      console.table([err.name, err.message]);
+   }
+   ```
+
+## `Interface` in TypeScript :
+
+-  Interfaces, on the other hand , define a contract must be object adhere to.
+-  Interface are also be used to represent type definition of an object.
+-  Interface only used for `object`, `array` and `function` type definition.
+-  Interface are `extends` single or multiple `interface` or `type alias`
+
+```ts
+type TUser = {
+   name: string;
+   email: string;
+};
+
+interface IUser {
+   roll: number;
+   age: number;
+}
+
+interface ICommonUser extends IUser, TUser {
+   contactNo?: string;
+   address: {
+      permanent: string;
+      present: string;
+   };
+}
+```
+
+-  Syntax:
+
+```ts
+interface IInterFaceName {
+   propertyName: type;
+   propertyName: type;
+}
+```
+
+-  ### `Object` Type with `Interface `:
+
+   ```ts
+   interface IPersonal {
+      name: string;
+      dob: Date;
+   }
+
+   interface IContact {
+      email: string;
+      phone: string;
+   }
+
+   interface IAddress {
+      permanent: string;
+      present: string;
+      city: string;
+      post: number;
+   }
+
+   interface IUser extends IPersonal, IContact {
+      status: "active" | "in-active";
+      address: IAddress;
+   }
+
+   const user: IUser = {
+      name: "mostafizur",
+      dob: new Date(),
+      email: "most@gmail.com",
+      phone: "1111111111",
+      address: {
+         permanent: "lakshmipur",
+         present: "lakshmipur",
+         city: "lakshmipur",
+         post: 3701,
+      },
+      status: "active",
+   };
+   ```
+
+-  ### `Array` Type In TypeScript:
+
+   -  We can define array type in typeScript with `interface`;
+   -  syntax :
+
+   ```ts
+   interface IArray {
+      [index: number]: number;
+   }
+
+   interface IStringArray {
+      [index: number]: string;
+   }
+   ```
+
+   -  Example :
+
+   ```ts
+   interface INumber {
+      [index: number]: number;
+   }
+
+   const numArr1: INumber = [1, 3, 4, 5];
+   ```
+
+-  ### `Function` Type with `Interface` :
+
+   -  We can define a type for function with `interface`.
+   -  syntax:
+
+   ```ts
+   interface TAdd {
+      (parameter: type, parameter: type): returnType;
+   }
+   ```
+
+   -  Example:
+
+   ```ts
+   interface IAdd {
+      (num1: number, num2: number): number;
+   }
+
+   const add1: IAdd = function add1(num1, num2) {
+      return num1 + num2;
+   };
+   ```
+
+## `Interface extends` & `Type alias Intersection`
+
+-  We can Extends any `interface ` and `type` which we define previously
+-  we can premix type and interface with `extends` in `interface` and
+   `intersection` in `type` & `interface`
+-  ### Extends and Intersection:
+-  Example:
+
+```ts
+type TUser = {
+   name: {
+      firstName: string;
+      lastName: string;
+   };
+};
+
+interface IUser extends TUser {
+   roll: number;
+}
+
+type TUserWithStatus = IUser & { status: "active" | "in-active" };
+
+interface INewUser extends TUserWithStatus {
+   address: string;
+}
+
+//  implement whole type here:
+
+const newUser: INewUser = {
+   name: {
+      firstName: "mostafizur",
+      lastName: "rahaman",
+   },
+   roll: 3,
+   address: "laskhmipur",
+   status: "active",
+};
+```
