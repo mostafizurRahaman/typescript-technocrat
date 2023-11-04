@@ -1280,3 +1280,115 @@ const newUser: INewUser = {
    status: "active",
 };
 ```
+
+## `Generics` In TypeScript : -
+
+-  TypeScript generics allow us to create reusable components or functions that
+   can handle multiple types.
+-  With generics, we can parameterize types and create type-safe and reusable
+   code.
+-  We can create generics for `function`, `array`, `object` and `classes`
+-  syntax :
+
+```ts
+type GenericsName<parameter, parameter> = GeneralType<arg, arg>;
+type GenerisName<parameter, parameter> = [parameter, parameter];
+```
+
+-  ### Generics For Array :
+
+   -  We can use generics for array to normalize or generalize and make
+      reuseable array type
+   -  To normalize array we can use capital `Array` in javaScript
+   -  for `string[] ` we can use `Array<string>`
+   -  for `number[]` we can ues `Array<number>`
+   -  for `boolean[]`, we can use `Array<boolean>`
+   -  for `IInterface[]`, we can use `Array<Interface>`
+   -  Syntax:
+
+   ```ts
+   // Generics Array:
+   type GenericName<parameter> = Array<parameter>;
+
+   // resuse the generics as need:
+
+   //for Boolean: just pass boolean as parameter:
+   const boolArr: GenericName<boolean> = [false, true];
+
+   // for String: just pass string :
+   const strArr: GenericsName<string> = ["one", "two", "three"];
+
+   // for number: just pass number as parameter:
+   const numArr: GenericsName<number> = [1, 2, 3, 4, 5, 6];
+
+   // for object : just pass the pattern or Interface or type :
+   const studentArr: GenericsName<{
+      name: string;
+      age: number;
+      isPresent: boolean;
+   }> = [
+      { name: "mostafiz", age: 20, isPresent: true },
+      { name: "mostafiz", age: 20, isPresent: true },
+   ];
+   ```
+
+   -  Example :
+
+   ```ts
+   //  Generics Type:
+   type GenericsArr<T> = Array<T>;
+
+   //Interface :
+   interface IUser {
+      name: string;
+      roll: number;
+   }
+
+   const numberArr: GenericsArr<number> = [1, 2, 3, 4, 5, 5];
+   //use generics for string []
+   const friendsArr: GenericsArr<string> = [
+      "Mostafizur rahaman",
+      "ratul hossain",
+      "hridoy hossain",
+   ];
+
+   // generalize for boolean
+   const booleanArr: GenericsArr<boolean> = [
+      false,
+      true,
+      false,
+      true,
+      false,
+      true,
+   ];
+
+   // generalize for User
+   const studentArr: GenericsArr<IUser> = [
+      { name: "Mostafizur rahaman ", roll: 2 },
+      { name: "Fahim hossain ", roll: 3 },
+      { name: "Roman hossain ", roll: 4 },
+      { name: "hridoy hossain ", roll: 5 },
+   ];
+   ```
+
+-  ### `Tuple` in Generics :
+
+   -  We can normalize or generalize any `Tuple` type with Generics;
+   -  Know the length of tuple and specify type and order.
+   -  syntax:
+
+   ```ts
+   // this tuple get only three parameter
+   type GenericsTuple<parameter1, parameter2, parameter2> = [
+      parameter1,
+      parameter2,
+      parameter3
+   ];
+
+   const tuple1: GenericsTuple<boolean, string, boolean> = [
+      false,
+      "one",
+      false,
+   ];
+   ```
+
