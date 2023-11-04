@@ -1522,3 +1522,38 @@ type GenerisName<parameter, parameter> = [parameter, parameter];
       },
    };
    ```
+
+-  ### `Function` with `Generics`:
+
+   -  we can define generic `function` type with `Generics`.
+   -  Which helps to reuse `function` type.
+   -  syntax:
+
+   ```ts
+   /**
+    * it's a function which return an array depends on data type
+    * @T : is type params which receive dynamic type for function
+    */
+   const getArr = <T>(parameter: T): T[] => {
+      return [parameter];
+   };
+
+   const stringArr: string[] = getArr<string>("one"); // returns ['one']
+   const numberArr: number[] = getArr<number>(20); // returns [2]
+   const boolean: boolean[] = getArr<boolean>(false); // returns [false]
+   /**
+    * Write function which get two data and return a tuple:
+    * @T : T is a type params which receive dynamic  type as param
+    * @K : K is a another params which also work like @T .
+    *
+    */
+
+   function createTuple2<T, Q>(a: T, b: Q): [T, Q] {
+      return [a, b];
+   }
+
+   const one: [string, number] = createTuple2<string, number>("one", 1);
+   const two: [number, string] = createTuple2<number, string>(1, "one");
+   console.log(one);
+   console.log(two);
+   ```
