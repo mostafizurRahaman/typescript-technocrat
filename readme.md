@@ -1557,3 +1557,92 @@ type GenerisName<parameter, parameter> = [parameter, parameter];
    console.log(one);
    console.log(two);
    ```
+
+-  ### `Constraint` in Generics :
+
+   -  With can `generics` `constraint` we can force to `provide` some specific
+      property.
+   -  Constraints are used to limit the kinds of types that a type parameter can
+      accept.
+   -  Constraints ensure that the properties accessed within the function are
+      available and compatible with the type parameter.
+   -  By using `extends` keyword we can `ensure` types which must need to assign
+   -  আমরা যখন Generics তৈরী করি তখন যদি কিছু নিদিষ্ট প্রোপ্রটি বা টাইপের ডাটা
+      আমরা পেতে চাই তখন আমরা extends keyword ব্যবহার করে কোনো টাইপ এলিয়াস বা
+      ইন্টারফেইসকে extends করতে পারি।
+   -  এর মাধ্যমে আমরা ইউজারকে কিছু নিদিষ্ট প্রোপ্রারটি নিশ্চিত করতে বাধ্য করতে
+      পারি।
+
+   -  Example:
+
+   ```ts
+   // Constraints IN Generics:
+
+   function addStudent<T extends { name: string; email: string; roll: number }>(
+      student: T
+   ) {
+      const course = "Next Level Development";
+      return {
+         ...student,
+         course,
+      };
+   }
+
+   //  student one :
+
+   const student1 = addStudent({
+      name: "mostafizur rahaman",
+      email: "mostafizur@gmail.com",
+      roll: 22,
+      age: 20,
+      haveWatch: true,
+   });
+
+   const student2 = addStudent({
+      name: "Ratul hossain",
+      email: "ratul@gmail.com",
+      roll: 21,
+      isCar: false,
+   });
+
+   const student3 = addStudent({
+      name: "redowan shawon",
+      email: "redowan@gmail.com",
+      roll: 3,
+      emni: "emni",
+   });
+   ```
+
+-  ### Constraints `keyof` in TypeScript:
+
+   -  The `keyof` keyword is used in TypeScript to extract the key type from an
+      object type.
+   -  `keyof` operator returns an union type :
+   -  Example with `function`:
+
+   ```ts
+   type IUser = {
+      name: string;
+      age: number;
+      isVerifed: boolean;
+   };
+
+   type key = keyof IUser; // return  key = 'name' | 'age' | 'isVerified'
+   ```
+
+   -  Example:
+
+   ```ts
+   const user: IUser = {
+      name: "Mostafizur Rahaman",
+      age: 20,
+      isVerified: true,
+   };
+   // here use the keyof and extends the  T to make limit the type with constraint.
+   function getPropertyValue<T, K extends keyof T>(obj: T, key: K) {
+      return obj[key];
+   }
+
+   const property1 = getPropertyValue(user, "isVerified");
+   console.log(property1);
+   ```
