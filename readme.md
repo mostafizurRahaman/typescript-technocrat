@@ -2040,3 +2040,114 @@ const AreaString: TAreaConverted<{
 
          user1.bike = { brand: "Yamaha", model: "Y-222" };
          ```
+
+---
+
+---
+
+---
+
+# Object Oreinted Programming In TypeScript(OOP)
+
+## What is OOP?
+
+-  A Programming Paradiam That organizes and models Software.
+-  Object-oriented programming (OOP) is a programming paradigm that organizes
+   software design around objects, which are instances of classes.
+
+## What is Paradiam?
+
+-  Paradiam is a `model` or `style` to write and organize code.
+
+## How many types paradiams in Programming ?
+
+-  There a several types of paradiam in Programming.
+   1. Procudural Programming Paradiam.
+   2. Declarative Programming.
+   3. Functional Programming
+   4. Object Oriented Programming
+   5. Event Driven programming
+
+## Building Block of OOP:
+
+-  Inheritance
+-  Polymorphism
+-  Abstruction
+-  Encampsulation
+
+## Class In JavaScript & TypeScript :
+
+-  create a `class` by using `class` keyword.
+-  classname startwith `Capitalital Letter`
+-  in class body define the class `variable` and we also initilize them
+-  then `create` a `contructor` which helps dynamically initilize or `assign`
+   value
+-  we can update any `variale` of class in `contructor` with `this.variable` =
+   `contructorParameter`
+-  Then out side of `constructor`, we can define `common function for class `
+-  we also access any `variable` of `class` into `function` with
+   `this.variableName`
+-  Example :
+
+```ts
+class Animal {
+   public name: string;
+   public species: string;
+   public sound: string;
+
+   // initialize value with constructor
+   constructor(name: string, species: string, sound: string) {
+      this.name = name;
+      this.species = species;
+      this.sound = sound;
+   }
+
+   // function of class:
+   makeSound() {
+      console.log(`The ${this.name} says ${this.sound}`);
+   }
+}
+```
+
+-  Now We can create an instance of class and use that :
+-  Example:
+
+```ts
+// create an isntance for men:
+const men = new Animal("Mostafizur Rahaman", "men", "bok bok");
+men.makeSound();
+console.log(men);
+
+// create an instance for cat:
+const cat = new Animal("Pusi Cat", "cat", "meaw meaw");
+console.log(cat);
+cat.makeSound();
+```
+
+## Use `Parameter properties` in Class:
+
+-  `Parameter properties` in `TypeScript` allow us to `simplify` our
+   `property declarations` by `initializing` them `directly` in the
+   `class constructor`
+-  when we add an ` access modifier` `in front of parameter` of
+   `constructor parameter` `typeScript compiler` will automatically initialize
+   the `corresponding property` with the provided value.
+-  And we don't need use `this.variable = parameter`.
+   `TypeScript automitically initialize the value `
+-  Example:
+
+```ts
+
+// the previous class and this one works same: 
+class Animal {
+   constructor(
+      public name: string,
+      public species: string,
+      public sound: string
+   ) {}
+
+   makeSound() {
+      console.log(`The ${this.name} says ${this.sound} `);
+   }
+}
+```
