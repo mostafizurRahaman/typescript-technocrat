@@ -29,7 +29,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     const getTodo = () => __awaiter(void 0, void 0, void 0, function* () {
         const res = yield fetch(`https://jsonplaceholder.typicode.com/todos/1`);
         const data = yield res.json();
-        console.log(data);
         return data;
     });
     getTodo();

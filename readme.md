@@ -1721,4 +1721,52 @@ type GenerisName<parameter, parameter> = [parameter, parameter];
       getTodo();
       ```
 
-   
+## <p style="color:#f00 ">Condition Type In typeScript </p>
+
+-  we can create conditional type in `typescript`. by using `ternary operator.`
+-  syntax :
+
+```ts
+type typeName = type1 extends type2 ? type3 : type4;
+```
+
+-  ### Nestd Condition :
+-  syntax:
+
+```ts
+// conditional type in typeScript :
+type a1 = string;
+type b1 = number;
+type c1 = undefined;
+
+type TUser = {
+   name: string;
+   email: string;
+};
+
+interface IUser {
+   name: string;
+   age: number;
+   phone: string;
+}
+
+// nested condition in typescript:
+type d = a1 extends b1 ? TUser : a1 extends c1 ? IUser : undefined; // type is undefined
+```
+
+-  ### `Conditional Type with` Generics:
+-  Example :
+
+```ts
+interface IUser {
+   name: string;
+   age: number;
+   phone: string;
+}
+
+//  checkPropertyExits
+
+type checkPropertyExits<T, Q> = T extends keyof Q ? true : false;
+
+type hasName = checkPropertyExits<"email", IUser>;
+```
