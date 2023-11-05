@@ -145,7 +145,7 @@ age = "20"; // show errors on code editor ;
 
 ## Basic Types In TypeScript :
 
--  ### `String` : We can implicitly Define a type of a variable in `Typescript` as `string`
+-  ### `String` : We can explicitly Define a type of a variable in `Typescript` as `string`
 
    -  This type of variable on allows `string` type of data.
    -  If we try to store others type of data, gets an `error` like
@@ -161,7 +161,7 @@ age = "20"; // show errors on code editor ;
    fullName = []; // array is not assignable to type string .
    ```
 
--  ### `Number` : We can implicitly Define a type of a variable in `Typescript` as `number`
+-  ### `Number` : We can explicitly Define a type of a variable in `Typescript` as `number`
 
    -  This type of variable on allows only `number` type of data.
    -  If we try to store others type of data, gets an `error` like
@@ -179,7 +179,7 @@ age = "20"; // show errors on code editor ;
    age = []; // array is not assignable to type number .
    ```
 
--  ### `Boolean` : We can implicitly Define a type of a variable in `Typescript` as `boolean`
+-  ### `Boolean` : We can explicitly Define a type of a variable in `Typescript` as `boolean`
 
    -  This type of variable on allows only `boolean` type of data.
    -  If we try to store others type of data, gets an `error` like
@@ -197,13 +197,13 @@ age = "20"; // show errors on code editor ;
    age = []; // array is not assignable to type number .
    ```
 
--  ### `Array` : we Can Implicitly Define a type of a variable in `Typescript` as `[]`.
+-  ### `Array` : we Can explicitly Define a type of a variable in `Typescript` as `[]`.
    -  This type of variable allows only `array` type of data.
    -  If we try to store others type of data, gets an `error` like
       `Type 'string' is not assignable to type '[]'`
    -  There are many type of array `string[], number[], boolean[], tuple ` etc.
 
-## `string[]`: we can implicitly Define a type of a variable in `TypeScript` as `string[]`
+## `string[]`: we can explicitly Define a type of a variable in `TypeScript` as `string[]`
 
 -  This type of variable allows only `string type data on array `. We can't
    store others type of data on array.Also we can't store other type of data on
@@ -224,7 +224,7 @@ friends = [false, false, true]; // Error: `Type boolean is not assignable to typ
 friends.push(false); // Error: `Type boolean is not assignable to type string`
 ```
 
-## `boolean[]`: we can implicitly Define a type of a variable in `TypeScript` as `Boolean[]`
+## `boolean[]`: we can explicitly Define a type of a variable in `TypeScript` as `Boolean[]`
 
 -  This type of variable allows only `boolean type data on array `. We can't
    store others type of data on array.Also we can't store other type of data on
@@ -246,7 +246,7 @@ isBoolean = "Mostafizur rahaman"; // Errors : type 'boolean' is not assignable t
 isBoolean = ["ratul hossain", "rakib hossain", 20]; // Errors : Type 'string & number' is not assignable to type boolean
 ```
 
-## `number[]`: we can implicitly Define a type of a variable in `TypeScript` as `number[]`
+## `number[]`: we can explicitly Define a type of a variable in `TypeScript` as `number[]`
 
 -  This type of variable allows only `number type data on array `. We can't
    store others type of data on array.Also we can't store other type of data on
