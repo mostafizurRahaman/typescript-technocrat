@@ -1646,3 +1646,79 @@ type GenerisName<parameter, parameter> = [parameter, parameter];
    const property1 = getPropertyValue(user, "isVerified");
    console.log(property1);
    ```
+
+-  ## Promise In TypeScript:
+
+   -  Promises in TypeScript are used to handle asynchronous operations and
+      provide better control over the flow of code.
+   -  ### Creating a New Promise: to create a promise use `new Promise() ` constructor. it's get a `callback` function as parameter, which get two parameter `resolve` & `reject`.
+
+   ```ts
+   const myPromise = new Promise((resolve, reject) => {
+      // Asynchronous code here
+   });
+   ```
+
+   -  ### Type of promise :
+
+      -  we can pass types `generically` afther `Promise` with `<type>` format:
+
+      ```ts
+      const myPromise = new Promise<string>((resolve, reject) => {
+         // asynchronous code is here.
+      });
+      ```
+
+   -  Type of Promise in TypeScript with Example :
+
+   ```ts
+   // type of promise
+   type TSomeThing = { message: "something" };
+
+   const createPromise = (): Promise<TSomeThing> => {
+      return new Promise<TSomeThing>((resolve, reject) => {
+         const data: TSomeThing = { message: "something" };
+         if (data) {
+            return resolve(data);
+         } else {
+            return reject("Promise not resolved");
+         }
+      });
+   };
+
+   const loadData = async (): Promise<TSomeThing> => {
+      const data: TSomeThing = await createPromise();
+      console.log(data);
+      return data;
+   };
+
+   loadData();
+   ```
+
+   -  ### Load Data from `external server`:
+
+      -  We can load data from external server and the data return a `promise`
+         when we try to `fetch`
+      -  Example:
+
+      ```ts
+      interface ITodo {
+         userId: number;
+         id: number;
+         title: string;
+         completed: boolean;
+      }
+
+      const getTodo = async (): Promise<ITodo> => {
+         const res = await fetch(
+            `https://jsonplaceholder.typicode.com/todos/1`
+         );
+         const data: ITodo = await res.json();
+         console.log(data);
+         return data;
+      };
+
+      getTodo();
+      ```
+
+   
