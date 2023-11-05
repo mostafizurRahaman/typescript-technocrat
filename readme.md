@@ -1842,3 +1842,201 @@ const AreaString: TAreaConverted<{
    depth: "",
 };
 ```
+
+-  ## `Utility` type in TypeScript :
+
+   -  ### 1. `Pick`: `Pick<objectType, unionOfObjectTypeKey>`: By using `Pick` uitily , we
+
+      can `pick` specific type from an exitings objectType.
+
+      -  Pick get two parameter.
+      -  `First Parameter:` get an `Object Type`
+      -  `second parameter` : get an `union` of keys `name`
+      -  Syntax:
+
+      ```ts
+      // extings object type :
+      interface IPerson {
+         name: string;
+         email: string;
+         age: number;
+         blood: "B+" | "B-" | "A+" | "A-" | "O+" | "O-" | "AB+" | "AB-";
+      }
+
+      // create a new type by picking specific key type from exitings object type
+
+      type IModifiedPerson = Pick<IPerson, "name" | "email" | "age">;
+      //  the type will be   ->   { name: string;  email: string;  age: number;  }
+      ```
+
+   -  ### 2. `Omit<objectType, unionOfObjectKeyName>` : By using `Omit` we can create a new Type by removing `some sepecific keys` from `objecttype`
+
+      -  `Omit` is opposite of `Pick`.
+      -  syntax:
+
+      ```ts
+      // exiting type :
+      interface IPerson {
+         name: string;
+         email: string;
+         age: number;
+         blood: "B+" | "B-" | "A+" | "A-" | "O+" | "O-" | "AB+" | "AB-";
+      }
+
+      // create a new type with omit:
+      type IModifiedPerson = Omit<IPerson, "name" | 'email" >;
+      // it's remove 'name' and 'email' key from new Type;
+      // The new type will be:
+        /*
+         {
+            age: number,
+            blood: "B+" | "B-" | "A+" | "A-" | "O+" | "O-" | "AB+" | "AB-";
+         }
+         */
+      ```
+
+   -  ### 3. `Partail<objectType>` : `Partial` make all properties `optional`.
+
+      -  syntax:
+
+      ```ts
+      // exiting type:
+      interface prevType {
+         name: string;
+         age: number;
+         email: string;
+         isValid: boolean;
+      }
+
+      // new type after use Partial :
+      type partialType = Partial<prevType>;
+      // the partialType will be like below:
+
+      /* 
+         type partialType = {
+            name: string | undefined;
+            age: number | undefined;
+            email: string | undefined;
+            isValid: boolean | undefined;
+         };
+      */
+      ```
+
+   -  ### 4. `Required<objectType>` : `Required` utility makes all properties `required`.
+
+      -  It is the oposite of `Partial` utility.
+      -  Syntax:
+
+      ```ts
+      // exiting type:
+      interface prevType {
+         name?: string;
+         age?: number;
+         email: string;
+         isValid?: boolean;
+      }
+
+      // convert all properties required with Required uitility:
+
+      type RequiredType = Required<prevType>;
+      // the new type will be like below:
+
+      /* 
+      
+          {
+               name: string;
+               age: number;
+               email: string;
+               isValid: boolean;
+         }       
+      
+      */
+      ```
+
+   -  ### 5. `Readonly<prevType>`: `Readonly` utilites convert all properties `readonly`
+
+      -  `readonly` only `assignable` when we declare the variable.
+      -  `but` we cann't modified `readonly` property.
+      -  syntax:
+
+      ```ts
+      // exiting type  :
+      interface IUser {
+         name: string;
+         age: number;
+         email: string;
+         isValid: boolean;
+      }
+
+      // make all properties readonly :
+      type ReadonlyUser = Readonly<IUser>;
+      // the type will be :
+      /*
+            type ReadonlyUser = {
+               readonly name : string; 
+               readonly age  : number; 
+               readonly email: string;
+               readonly isValid: boolean;
+      
+            }       
+         */
+
+      const user1: ReadonlyUser = {
+         name: "mostafizur rahaman",
+         email: "m@gmail.com",
+         age: 2,
+         isValid: true,
+      };
+
+      // try to modify :
+      user1.name = "ratul hossain"; // Error: cann't assign 'name' because it's readonly property.
+      ```
+
+   -  ### 6. `Record<keyType, valueType>`: `Record` properties helps us to create a `flexiable` object type
+
+      -  ##### Example: 1. `Record<string, string>` Here all properties will be string
+
+         because we `fixed` the type for value is `string`
+
+         ```ts
+         type TUser = Record<string, string>;
+
+         let user: TUser = {
+            a: "mostafizur",
+            b: "ratul hossain",
+            c: "ismail",
+         };
+
+         user.age = 2; // Errors: Type 'number' cann't assignable to type "string"
+         ```
+
+      -  ##### Example: 2. `Record<string, number>` Here all properties will be number
+
+         because we `fixed` the type for value is `number`
+
+         ```ts
+         type TUser = Record<string, number>;
+
+         let user: TUser = {
+            a: 20,
+            b: 30,
+            c: 21,
+         };
+
+         user.d = "thirty"; // Errors: Type 'string' cann't assignable to type "number"
+         ```
+
+      -  ##### Example 3: `Record<string, unknown>`: the object properties allows all types of data.
+
+         ```ts
+         type TUser = Record<string, unknown>;
+         const user1: TUser = {
+            name: "mostafizur rahaman",
+            email: "m@gmal.com",
+            age: 20,
+            isValid: true,
+            haveMoney: undefined,
+         };
+
+         user1.bike = { brand: "Yamaha", model: "Y-222" };
+         ```
