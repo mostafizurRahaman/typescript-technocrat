@@ -1770,3 +1770,75 @@ type checkPropertyExits<T, Q> = T extends keyof Q ? true : false;
 
 type hasName = checkPropertyExits<"email", IUser>;
 ```
+
+## `Lookup type` or `get Propertype` in typescript
+
+-  we can get any property in typescript of object by using `type alias` or
+   `interface`
+-  syntax:
+
+```ts
+interface IUser {
+   name: string;
+   email: string;
+   phone: number;
+}
+
+//  type getPropertyType = typeName['propertyName']
+
+type getProperType = IUser["name"]; // type is string
+type getEmailType = IUser["email"]; // type is string
+type getPhoneType = IUse["phone"]; // type is number
+```
+
+## `Mapped type ` - in TypeScript
+
+-  By using mapped type in typescript we can mapped every property
+   of` type alias` or `interface`.
+-  mapping syntax :
+
+```ts
+type TAreaConverted<T> = {
+   [key in keyof T]: T[key];
+};
+```
+
+-  Example :
+
+```ts
+type TAreaNumber = {
+   height: number;
+   width: number;
+};
+
+// lookup Type in Typescript :
+type THeight = TAreaNumber["height"];
+
+// map to convert convert TAreaNumber to other type :
+
+// this type convert to  boolean type on . it's fixed . but we need more flexibility
+
+// type TAreaConverted = {
+//    [index in "height" | "width" | "depth"]: boolean;
+// };
+
+// use keyof and and provide a type
+// it converted only TAreaNumber key to boolean type
+// type TAreaConverted = {
+//    [key in keyof TAreaNumber]: TAreaNumber[key];
+// };
+
+type TAreaConverted<T> = {
+   [key in keyof T]: T[key];
+};
+
+const AreaString: TAreaConverted<{
+   height: string;
+   width: number;
+   depth: boolean;
+}> = {
+   height: "10vh",
+   width: 3000,
+   depth: "",
+};
+```
