@@ -2465,3 +2465,141 @@ getAnimalAndMakeSound(cat);
 getAnimalAndMakeSound(dog);
 getAnimalAndMakeSound(pig);
 ```
+
+## Access Modifire in `Class`
+
+-  ### Public Modifier:
+
+   -  `Public`: Generally all `class` properties are `public`.
+   -  `public` properties are `accessiable` outside of class.
+   -  we don't need `use` explicitly `public` modifier.
+   -  Example :
+
+   ```ts
+   class BankAccount {
+      public id: number;
+      public name: string;
+      public balance: number;
+
+      constructor(id: number, name: string, balance: number) {
+         this.id = id;
+         this.name = name;
+         this.balance = balance;
+      }
+   }
+
+   const myBankAccount = new BankAccount(2, "Mostafizur Rahaman", 2000);
+
+   // public properties are changeable from outside of class .
+   myBankAccount.id = 20;
+   myBankAccount.balance = 20;
+   console.log(myBankAccount);
+   ```
+
+-  ### `Readonly` modifier : Readonly `modifier ` makes properties readonly.
+
+   -  `readonly` properties only assignable when we create `new instance`.
+   -  we cann't modified the `property`.
+   -  Example :
+
+   ```ts
+   class BankAccount {
+      public readonly id: number;
+      public name: string;
+      public balance: number;
+
+      constructor(id: number, name: string, balance: number) {
+         this.id = id;
+         this.name = name;
+         this.balance = balance;
+      }
+   }
+
+   const myBankAccount = new BankAccount(2, "Mostafizur Rahaman", 2000);
+
+   // public properties are changeable from outside of class .
+
+   myBankAccount.id = 20; //cannot assign to 'id' because it is a read-only property.
+
+   myBankAccount.balance = 20;
+   console.log(myBankAccount);
+   ```
+
+   -  ### `Private`:
+
+      -  `Private` modifier makes properties `unaccesable` from `outside` of
+         `class`
+      -  `private` property only `accessable` into `class`
+      -  we can access private property from `derived class` or
+         `inherited class `
+      -  conbention: start private property name with `_` like :
+         `private _balance : number`
+      -  Example :
+
+      ```ts
+      class BankAccount {
+         private readonly id: number;
+         public name: string;
+         private _balance: number;
+
+         constructor(id: number, name: string, _balance: number) {
+            this.id = id;
+            this.name = name;
+            this._balance = _balance;
+         }
+      }
+
+      const myBankAccount = new BankAccount(2, "Mostafizur Rahaman", 2000);
+
+      // we cann't access private properties from outside of  Class
+
+      myBankAccount._balance = 20; // Errors: Because '_balance' is private
+
+      console.log(myBankAccount);
+      ```
+
+   -  ### `Protected:`
+
+      -  `protected` property also don't accessiable from outside of `class`
+      -  `protected` property only `assiable` on class on `derived class ` or
+         `inherited class`
+      -  Example:
+
+      ```ts
+      class BankAccount {
+         readonly id: number;
+         public name: string;
+         protected _balance: number;
+
+         constructor(id: number, name: string, _balance: number) {
+            this.id = id;
+            this.name = name;
+            this._balance = _balance;
+         }
+      }
+
+      class ChildrenBankAccount extends BankAccount {
+         constructor(_id: number, name: string, _balance: number) {
+            super(_id, name, _balance);
+         }
+
+         updateBalance(amount: number) {
+            // protected type accessible into Derived class
+            this._balance = this._balance + amount;
+         }
+      }
+
+      const myBankAccount = new BankAccount(2, "Mostafizur Rahaman", 2000);
+
+      const myChildrenAccount = new ChildrenBankAccount(
+         4,
+         "Mostafizur Rahaman",
+         2000
+      );
+
+      // we cann't access proteched properties from outside of  Class
+      myBankAccount._balance = 20; // Errors: Because '_balance' is private
+
+      myChildrenAccount.updateBalance(400);
+      console.log(myChildrenAccount);
+      ```
