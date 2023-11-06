@@ -1,86 +1,48 @@
 {
-   // create a common class for every person:
-   class Person {
+   //   type guard:
+
+   // write a function which get two parameter string or number  and return number if 2 parameter is number or return string if one or both parameter is string ;
+
+   // type of:
+
+   const getNumberAndString = (a: string | number, b: number | string) => {
+      if (typeof a === "number" && typeof b === "number") {
+         return a + b;
+      } else {
+         return a.toString() + b.toString();
+      }
+   };
+
+   const res: number = getNumberAndString(20, 20) as number;
+   const res1: string = getNumberAndString("20", 20) as string;
+   const res2: string = getNumberAndString(20, "20") as string;
+   const res3: string = getNumberAndString("20", "20") as string;
+   console.log(res, res1, res2, res3);
+
+   // type guard in :
+
+   type TNormalPerson = {
       name: string;
-      age: number;
+   };
+
+   type TBipPerson = {
       email: string;
+   } & TNormalPerson;
 
-      constructor(name: string, age: number, email: string) {
-         this.name = name;
-         this.age = age;
-         this.email = email;
+   const normalPerson: TNormalPerson = { name: "Mostafizur rahaman " };
+   const adminPerson: TBipPerson = { name: "Mostafizur", email: "m@gmail.com" };
+
+   const getAccess = (person: TBipPerson | TNormalPerson): string => {
+      if ("email" in person) {
+         return `Congratulations, ${person.name} you can get access`;
+      } else {
+         return `So Sad You can't get access `;
       }
+   };
 
-      sleeping(hour: number) {
-         console.log(`I will sleeping for ${hour}`);
-      }
-   }
+   const out1: string = getAccess(normalPerson);
+   const out2: string = getAccess(adminPerson);
 
-   // Create a student class:
-   class Student extends Person {
-      roll: number;
-
-      constructor(name: string, age: number, roll: number, email: string) {
-         super(name, age, email);
-         this.roll = roll;
-      }
-   }
-
-   const student1 = new Student("mostafiuar", 2, 2, "mostafizur rahaman");
-   student1.sleeping(2);
-
-   console.log(student1);
-
-   class Teacher extends Person {
-      designation: string;
-
-      constructor(
-         name: string,
-         age: number,
-         email: string,
-         designation: string
-      ) {
-         super(name, age, email);
-         this.designation = designation;
-      }
-
-      teaching(subject: string) {
-         console.log(`I am a teacher of ${subject}`);
-      }
-   }
-
-   const teacher1 = new Teacher(
-      "Riaz Uddin",
-      35,
-      "riaz@gmail.com",
-      "head teacher"
-   );
-   console.log(teacher1);
-   teacher1.teaching("English");
-   teacher1.sleeping(4);
-
-   // create another children with by inheriting Person class
-   class WebDev extends Person {
-      skills: string[];
-
-      constructor(name: string, age: number, email: string, skills: string[]) {
-         super(name, age, email);
-         this.skills = skills;
-      }
-
-      coding() {
-         console.log(`${this.name} code with ${this.skills.join(" * ")}`);
-      }
-   }
-
-   const webdev1 = new WebDev("Mostafizur Rahaman", 20, "mos@gmail.com", [
-      "react",
-      "nextJs",
-      "javaScript",
-      "TypeScript",
-   ]);
-
-   console.log(webdev1);
-
-   webdev1.coding();
+   console.log(out1);
+   console.log(out2);
 }
