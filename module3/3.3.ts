@@ -5,19 +5,16 @@
 
    // type of:
 
-   const getNumberAndString = (a: string | number, b: number | string) => {
+   const getAddNumberORString = (
+      a: number | string,
+      b: number | string
+   ): number | string => {
       if (typeof a === "number" && typeof b === "number") {
          return a + b;
       } else {
          return a.toString() + b.toString();
       }
    };
-
-   const res: number = getNumberAndString(20, 20) as number;
-   const res1: string = getNumberAndString("20", 20) as string;
-   const res2: string = getNumberAndString(20, "20") as string;
-   const res3: string = getNumberAndString("20", "20") as string;
-   console.log(res, res1, res2, res3);
 
    // type guard in :
 

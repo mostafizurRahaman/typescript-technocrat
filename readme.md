@@ -2167,93 +2167,301 @@ class Animal {
    of `parent` and `chlidren`
 -  we use `extends` `keyword` to `inherit` any `class`
 -  call `super` to send the `children` `constructor` value to `parenet`
-- Example : 
-```ts 
-    // create a common class for every person:
-   class Person {
+-  Example :
+
+```ts
+// create a common class for every person:
+class Person {
+   name: string;
+   age: number;
+   email: string;
+
+   constructor(name: string, age: number, email: string) {
+      this.name = name;
+      this.age = age;
+      this.email = email;
+   }
+
+   sleeping(hour: number) {
+      console.log(`I will sleeping for ${hour}`);
+   }
+}
+
+// Create a student class:
+class Student extends Person {
+   roll: number;
+
+   constructor(name: string, age: number, roll: number, email: string) {
+      super(name, age, email);
+      this.roll = roll;
+   }
+}
+
+const student1 = new Student("mostafiuar", 2, 2, "mostafizur rahaman");
+student1.sleeping(2);
+
+console.log(student1);
+
+class Teacher extends Person {
+   designation: string;
+
+   constructor(name: string, age: number, email: string, designation: string) {
+      super(name, age, email);
+      this.designation = designation;
+   }
+
+   teaching(subject: string) {
+      console.log(`I am a teacher of ${subject}`);
+   }
+}
+
+const teacher1 = new Teacher(
+   "Riaz Uddin",
+   35,
+   "riaz@gmail.com",
+   "head teacher"
+);
+console.log(teacher1);
+teacher1.teaching("English");
+teacher1.sleeping(4);
+
+// create another children with by inheriting Person class
+class WebDev extends Person {
+   skills: string[];
+
+   constructor(name: string, age: number, email: string, skills: string[]) {
+      super(name, age, email);
+      this.skills = skills;
+   }
+
+   coding() {
+      console.log(`${this.name} code with ${this.skills.join(" * ")}`);
+   }
+}
+
+const webdev1 = new WebDev("Mostafizur Rahaman", 20, "mos@gmail.com", [
+   "react",
+   "nextJs",
+   "javaScript",
+   "TypeScript",
+]);
+
+console.log(webdev1);
+
+webdev1.coding();
+```
+
+## `Type Guard` In typeScript:
+
+-  ### `typeof` guard:
+
+   -  The ` typeof`` type guard ` checks whether a `variable` is of a `certain`
+      `primitive type`, such as `string`, `number`, `boolean`, or `symbol`.
+   -  Example :
+
+   ```ts
+   const getAddNumberORString = (
+      a: number | string,
+      b: number | string
+   ): number | string => {
+      if (typeof a === "number" && typeof b === "number") {
+         return a + b;
+      } else {
+         return a.toString() + b.toString();
+      }
+   };
+   ```
+
+-  ### `in` guard:
+
+   -  The `in` type guard check when we need to check a property is avialble
+      into an `object`.
+   -  `in` guard used to check , is the `specific property` aviable into
+      `object` or `not`?
+   -  Example:
+
+   ```ts
+   // type guard in :
+
+   type TNormalPerson = {
       name: string;
-      age: number;
+   };
+
+   type TBipPerson = {
       email: string;
+   } & TNormalPerson;
 
-      constructor(name: string, age: number, email: string) {
+   const normalPerson: TNormalPerson = { name: "Mostafizur rahaman " };
+   const adminPerson: TBipPerson = { name: "Mostafizur", email: "m@gmail.com" };
+
+   const getAccess = (person: TBipPerson | TNormalPerson): string => {
+      if ("email" in person) {
+         return `Congratulations, ${person.name} you can get access`;
+      } else {
+         return `So Sad You can't get access `;
+      }
+   };
+
+   const out1: string = getAccess(normalPerson);
+   const out2: string = getAccess(adminPerson);
+
+   console.log(out1);
+   console.log(out2);
+   ```
+
+-  `instanceof` guard:
+
+   -  `instanceof` guard used when dealing with classes or their instance.
+   -  Example:
+
+   ```ts
+   class Animal {
+      name: string;
+      species: string;
+      sound: string;
+
+      constructor(name: string, species: string, sound: string) {
          this.name = name;
-         this.age = age;
-         this.email = email;
+         this.species = species;
+         this.sound = sound;
       }
 
-      sleeping(hour: number) {
-         console.log(`I will sleeping for ${hour}`);
+      makeSound() {
+         console.log(`The ${this.name} says ${this.sound}`);
+      }
+   }
+   // create a  children class for dog by extending Animal
+   class Dog extends Animal {
+      constructor(name: string, species: string, sound: string) {
+         super(name, species, sound);
+      }
+
+      // make dog sound:
+      makeBark() {
+         console.log(`The ${this.name} is Barking `);
       }
    }
 
-   // Create a student class:
-   class Student extends Person {
-      roll: number;
+   // create a children class for cat extending Animal:
+   class Cat extends Animal {
+      constructor(name: string, species: string, sound: string) {
+         super(name, species, sound);
+      }
 
-      constructor(name: string, age: number, roll: number, email: string) {
-         super(name, age, email);
-         this.roll = roll;
+      // make sound for cat;
+      makeMeaw() {
+         console.log(`The ${this.name} says ${this.sound}`);
       }
    }
 
-   const student1 = new Student("mostafiuar", 2, 2, "mostafizur rahaman");
-   student1.sleeping(2);
+   // create an instance for dog
+   const dog = new Dog("Shadow Dog", "dog", "gew gew");
 
-   console.log(student1);
+   // create an instance for cat:
+   const cat = new Dog("Black Cat", "cat", "meaw meaw");
 
-   class Teacher extends Person {
-      designation: string;
+   // create another instance for pig:
+   const pig = new Animal("Pink Pig", "pig", "make some sweet sounds");
 
-      constructor(
-         name: string,
-         age: number,
-         email: string,
-         designation: string
-      ) {
-         super(name, age, email);
-         this.designation = designation;
+   const getAnimalAndMakeSound = (animal: Animal) => {
+      if (animal instanceof Dog) {
+         animal.makeBark();
+      } else if (animal instanceof Cat) {
+         animal.makeMeaw();
+      } else {
+         animal.makeSound();
       }
+   };
 
-      teaching(subject: string) {
-         console.log(`I am a teacher of ${subject}`);
-      }
+   getAnimalAndMakeSound(dog);
+   getAnimalAndMakeSound(cat);
+   getAnimalAndMakeSound(pig);
+   ```
+
+## `is` predicate in typeScript.
+
+-  `is` predicate is used to define a user defined type when the `function`
+   `return type` is boolean.
+
+-  syntax:
+
+```ts
+variable as Type;
+```
+
+-  Example :
+
+```ts
+// create a animal:
+class Animal {
+   name: string;
+   species: string;
+   sound: string;
+
+   constructor(name: string, species: string, sound: string) {
+      this.name = name;
+      this.species = species;
+      this.sound = sound;
    }
 
-   const teacher1 = new Teacher(
-      "Riaz Uddin",
-      35,
-      "riaz@gmail.com",
-      "head teacher"
-   );
-   console.log(teacher1);
-   teacher1.teaching("English");
-   teacher1.sleeping(4);
-
-   // create another children with by inheriting Person class
-   class WebDev extends Person {
-      skills: string[];
-
-      constructor(name: string, age: number, email: string, skills: string[]) {
-         super(name, age, email);
-         this.skills = skills;
-      }
-
-      coding() {
-         console.log(`${this.name} code with ${this.skills.join(" * ")}`);
-      }
+   makeSound() {
+      console.log(`The ${this.name} says ${this.sound}`);
+   }
+}
+// create a  children class for dog by extending Animal
+class Dog extends Animal {
+   constructor(name: string, species: string, sound: string) {
+      super(name, species, sound);
    }
 
-   const webdev1 = new WebDev("Mostafizur Rahaman", 20, "mos@gmail.com", [
-      "react",
-      "nextJs",
-      "javaScript",
-      "TypeScript",
-   ]);
+   // make dog sound:
+   makeBark() {
+      console.log(`The ${this.name} is Barking `);
+   }
+}
 
-   console.log(webdev1);
+// create a children class for cat extending Animal:
+class Cat extends Animal {
+   constructor(name: string, species: string, sound: string) {
+      super(name, species, sound);
+   }
 
-   webdev1.coding();
+   // make sound for cat;
+   makeMeaw() {
+      console.log(`The ${this.name} says ${this.sound}`);
+   }
+}
 
+// create an instance for dog
+const dog = new Dog("Shadow Dog", "dog", "gew gew");
 
+// create an instance for cat:
+const cat = new Dog("Black Cat", "cat", "meaw meaw");
 
-]```
+// create another instance for pig:
+const pig = new Animal("Pink Pig", "pig", "make some sweet sounds");
+
+// we can handle smartly handle check type by using function:
+const isDog = (animal: Animal): animal is Dog => {
+   return animal instanceof Dog;
+};
+
+// here used is predicate:
+const isCat = (animal: Animal): animal is Cat => {
+   return animal instanceof Cat;
+};
+
+const getAnimalAndMakeSound = (animal: Animal) => {
+   if (isDog(animal)) {
+      animal.makeBark();
+   } else if (isCat(animal)) {
+      animal.makeMeaw();
+   } else {
+      animal.makeSound();
+   }
+};
+
+getAnimalAndMakeSound(cat);
+getAnimalAndMakeSound(dog);
+getAnimalAndMakeSound(pig);
+```
