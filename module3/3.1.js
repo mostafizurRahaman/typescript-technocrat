@@ -36,6 +36,7 @@
 //    cat.makeSound();
 // }
 {
+    // without parameter Properties: 
     // class Animal {
     //    public name: string = "animal";
     //    public species: string = "animal";
