@@ -2608,7 +2608,7 @@ getAnimalAndMakeSound(pig);
 
 -  If we define any `function` `getter` & `setter` method, we can access the
    `function` from class `instance` as property.
--  ### Getter : `getter function` start with `get function` keyword:
+-  ### Getter : `getter function` start with `get` keyword:
 
    -  By using getter we can get data from class.
    -  we can access getter functon as `property of class instance`
@@ -2704,4 +2704,94 @@ getAnimalAndMakeSound(pig);
    console.log(person1.age);
    console.log(person2.age);
    console.log(person3.age);
+   ```
+
+-  ## `Static` :
+-  To create a `static variable` in `javaScript class` , you can use
+   `static keywrod` before `variable name`
+-  `Static method` convert the variable only for class .
+-  `static variables ` are accessiable directly as `Class Property`. You can not
+   access the `variable` with `instance`
+
+   ```ts
+   class Sleep {
+      public static sleepingHours: number = 8;
+
+      increment() {
+         // when we use static variable we need access the variable with ClassName.propertyName
+         Sleep.sleepingHours = Sleep.sleepingHours + 1;
+      }
+   }
+   ```
+
+-  when update `static` variable of `class` with `one` instance its will update
+   the property for all `instance` of that class.
+-  Static `variable ` allocate the `same memory location`
+-  // we need to access the static variable as Class property . we can not find
+   the property as in instance. const hours: number = Sleep.sleepingHours;
+   console.log(hours);
+
+   ```ts
+   class Sleep {
+      public static sleepingHours: number = 8;
+
+      // increment sleeping hours:
+      increment() {
+         // when we use static variable we need access the variable with ClassName.propertyName
+         Sleep.sleepingHours = Sleep.sleepingHours + 1;
+      }
+
+      // decrement Sleeping hours:
+      decrement() {
+         Sleep.sleepingHours = Sleep.sleepingHours - 1;
+      }
+   }
+
+   // we need to access the static variable as Class property . we can not find the property as  in instance.
+   const hours: number = Sleep.sleepingHours;
+   console.log(hours);
+
+   // create two instance to update the static variable:
+   const sleep1 = new Sleep();
+   const sleep2 = new Sleep();
+
+   // here  we have two instance:
+   sleep1.increment(); // increment for sleep1; but it update for all instance or full class .
+   sleep2.increment();
+   ```
+
+-  To create a static method in a JavaScript class, you can use the static
+   keyword before the method name.
+-  Static methods are called directly on the class itself, without creating an
+   instance of the class.
+
+   ```ts
+   class Counter {
+      // static modifier use one memory Reference for variable.
+      // from any instance we can change value , it's will be change for every instance. This main after using static, static makes the variable only for Class.
+      // After  make a variable static , we we need access the variable with className not this keyword.
+      public static counter: number = 0;
+
+      static increment() {
+         Counter.counter = Counter.counter + 1;
+      }
+
+      static decrement() {
+         Counter.counter = Counter.counter - 1;
+      }
+   }
+
+   // create an instance for counter :
+   const one = new Counter();
+   const two = new Counter();
+
+   // increment counter for one instance:
+   Counter.increment();
+   Counter.increment();
+
+   //  we need to call the increment with Class method not instance method. After making static it's only accessible with className.
+   Counter.increment();
+
+   console.log(Counter.counter);
+   console.log(Counter.counter);
    ```
